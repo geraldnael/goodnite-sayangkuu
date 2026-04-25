@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Bobo, Sayang 🌙</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="stars"></canvas>
+    <div class="moon"></div>
+    <div class="clouds">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3"></div>
+    </div>
+    <div id="fhc" class="floating-hearts-container"></div>
+
+    <main id="app">
+      <div class="card" id="card">
+        <div class="top-glow"></div>
+
+        <div class="icon-wrap">
+          <span class="main-icon">🌙</span>
+          <span class="sparkle s1">✦</span>
+          <span class="sparkle s2">✦</span>
+          <span class="sparkle s3">✦</span>
+        </div>
+
+        <h1 class="greeting">Selamat Bobo</h1>
+        <p class="sub-greeting">& Mimpi yang Indah, Sayaang ✨</p>
+
+        <div class="divider">
+          <span class="divider-star">✦</span>
+        </div>
+
+        <p class="blessing">
+          <span class="cross-symbol">✝</span>
+          Tuhan Yesus memberkati dan melindungimu sayang,<br />
+          dalam tidurmu, dalam mimpimu, dalam setiap nafasmu.<br />
+          Kamu selalu ada dalam doa-doaku malam ini. 🙏
+        </p>
+
+        <blockquote class="love-msg">
+          "I love you more than you know, babe —<br />
+          lebih dari semua kata yang bisa aku ucapkan." 💕
+        </blockquote>
+
+        <div class="hearts-row">
+          <span class="h-dot" style="--d: 0s">❤️</span>
+          <span class="h-dot" style="--d: 0.3s">🩷</span>
+          <span class="h-dot" style="--d: 0.6s">💛</span>
+          <span class="h-dot" style="--d: 0.9s">🩷</span>
+          <span class="h-dot" style="--d: 1.2s">❤️</span>
+        </div>
+
+        <div class="music-section">
+          <div class="music-status">
+            <span class="music-icon-dot" id="musicDot"></span>
+            <span id="musicLabel">Merekah — Monica Christina</span>
+          </div>
+
+          <div class="music-controls">
+            <button class="btn-play" id="btnPlay" onclick="togglePlay()">
+              <span id="playIcon">▶</span>
+            </button>
+            <button class="btn-stop" id="btnStop" onclick="stopMusic()">
+              ■
+            </button>
+          </div>
+
+          <div class="volume-row">
+            <span class="vol-icon">🔈</span>
+            <input
+              type="range"
+              id="volSlider"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.8"
+              oninput="setVolume(this.value)"
+            />
+            <span class="vol-icon">🔊</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <audio id="bgAudio" src="music/mereka.mp3" loop preload="auto"></audio>
+
+    <script src="app.js"></script>
+  </body>
+</html>

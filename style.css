@@ -1,0 +1,384 @@
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --night: #080818;
+  --deep: #0e0e2a;
+  --mid: #16163a;
+  --gold: #f5d87a;
+  --gold-soft: #e8c96d;
+  --rose: #f5a8b8;
+  --white: rgba(255,255,255,0.9);
+  --muted: rgba(255,255,255,0.55);
+  --card-bg: rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.1);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--night);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── Stars canvas ─── */
+#stars {
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── Moon ─── */
+.moon {
+  position: fixed;
+  top: 32px; right: 52px;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #fffbe8, #f5d87a 55%, #c9a730);
+  box-shadow:
+    0 0 20px 6px rgba(245,216,122,0.35),
+    0 0 60px 20px rgba(245,216,122,0.12);
+  z-index: 1;
+  animation: moonFloat 7s ease-in-out infinite;
+}
+
+@keyframes moonFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ─── Clouds ─── */
+.clouds { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+.cloud {
+  position: absolute;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50px;
+}
+
+.c1 { width: 200px; height: 40px; top: 18%; left: -220px; animation: driftCloud 30s linear infinite; }
+.c2 { width: 140px; height: 28px; top: 30%; left: -160px; animation: driftCloud 45s linear 10s infinite; opacity: 0.6; }
+.c3 { width: 260px; height: 50px; top: 12%; left: -280px; animation: driftCloud 55s linear 5s infinite; opacity: 0.4; }
+
+@keyframes driftCloud {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 320px)); }
+}
+
+/* ─── Floating hearts ─── */
+.floating-hearts-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.fheart {
+  position: absolute;
+  bottom: -40px;
+  opacity: 0;
+  animation: riseHeart 7s ease-in forwards;
+}
+
+@keyframes riseHeart {
+  0% { opacity: 0; transform: translateY(0) scale(0.7) rotate(-8deg); }
+  8% { opacity: 0.9; }
+  85% { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-115vh) scale(1.15) rotate(8deg); }
+}
+
+/* ─── App layout ─── */
+#app {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+/* ─── Card ─── */
+.card {
+  position: relative;
+  max-width: 460px;
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  padding: 3rem 2.25rem 2.5rem;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: fadeUp 1.3s cubic-bezier(0.22,1,0.36,1) forwards;
+  opacity: 0;
+  overflow: hidden;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.top-glow {
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 200px; height: 120px;
+  background: radial-gradient(ellipse, rgba(245,216,122,0.18), transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── Icon ─── */
+.icon-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+
+.main-icon {
+  font-size: 56px;
+  line-height: 1;
+  display: block;
+  animation: iconPulse 3s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50% { transform: scale(1.08) rotate(3deg); }
+}
+
+.sparkle {
+  position: absolute;
+  color: var(--gold);
+  font-size: 12px;
+  animation: sparklePop 2.5s ease-in-out infinite;
+}
+
+.s1 { top: 2px; right: -14px; animation-delay: 0s; }
+.s2 { top: -10px; left: -10px; animation-delay: 0.6s; font-size: 9px; }
+.s3 { bottom: 4px; right: -8px; animation-delay: 1.2s; font-size: 8px; }
+
+@keyframes sparklePop {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ─── Text ─── */
+.greeting {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  line-height: 1.1;
+}
+
+.sub-greeting {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--gold-soft);
+  margin-bottom: 1.75rem;
+  opacity: 0.88;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,216,122,0.4), transparent);
+}
+
+.divider-star {
+  color: var(--gold);
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.blessing {
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.cross-symbol {
+  color: var(--gold);
+  font-weight: 400;
+  margin-right: 2px;
+}
+
+.love-msg {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--rose);
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
+  padding: 0 0.5rem;
+  border: none;
+}
+
+/* ─── Hearts row ─── */
+.hearts-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.h-dot {
+  font-size: 20px;
+  animation: floatDot 3s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes floatDot {
+  0%, 100% { transform: translateY(0); opacity: 0.65; }
+  50% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* ─── Music section ─── */
+.music-section {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 18px;
+  padding: 1.25rem 1.25rem 1rem;
+}
+
+.music-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  min-height: 22px;
+}
+
+.music-icon-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.music-icon-dot.playing {
+  background: #7ef7a0;
+  box-shadow: 0 0 6px #7ef7a0;
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
+
+#musicLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 260px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ─── Controls ─── */
+.music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+
+.btn-play, .btn-stop {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+  color: var(--white);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.btn-play:not(:disabled):hover,
+.btn-stop:not(:disabled):hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.08);
+}
+
+.btn-play:disabled, .btn-stop:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ─── Volume ─── */
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.vol-icon { font-size: 14px; }
+
+input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 99px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(245,216,122,0.5);
+}
+
+/* ─── Hint ─── */
+.music-hint {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.music-hint strong {
+  color: rgba(255,255,255,0.55);
+  font-weight: 400;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--night); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
