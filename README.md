@@ -13,7 +13,7 @@ goodnight-app/
 ├── app.js
 ├── README.md
 └── music/
-    └── mereka.mp3   ← taruh file lagu kamu di sini
+    └── merekah.mp3   ← taruh file lagu kamu di sini
 ```
 
 ---
